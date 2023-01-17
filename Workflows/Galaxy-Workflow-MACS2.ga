@@ -1,0 +1,172 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "MACS2",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Traitement"
+                }
+            ],
+            "label": "Traitement",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 355.5,
+                "height": 61,
+                "left": 684,
+                "right": 884,
+                "top": 294.5,
+                "width": 200,
+                "x": 684,
+                "y": 294.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "1f30f3b0-df32-40f2-8321-1906154a644e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "6e082e78-1f52-4276-865e-5a1b574907d1"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Control"
+                }
+            ],
+            "label": "Control",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 490.5,
+                "height": 61,
+                "left": 685,
+                "right": 885,
+                "top": 429.5,
+                "width": 200,
+                "x": 685,
+                "y": 429.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "ee04e522-6873-4500-94c9-f10e9b107353",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "b56f06d9-c3fd-4c74-ac3b-8b690e3eb493"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "control|c_multiple|input_control_file": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "treatment|input_treatment_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MACS2 callpeak",
+                    "name": "treatment"
+                }
+            ],
+            "label": null,
+            "name": "MACS2 callpeak",
+            "outputs": [
+                {
+                    "name": "output_tabular",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_narrowpeaks",
+                    "type": "bed"
+                },
+                {
+                    "name": "output_summits",
+                    "type": "bed"
+                }
+            ],
+            "position": {
+                "bottom": 609.5,
+                "height": 302,
+                "left": 1022,
+                "right": 1222,
+                "top": 307.5,
+                "width": 200,
+                "x": 1022,
+                "y": 307.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_narrowpeaks": {
+                    "action_arguments": {
+                        "newname": "${Comparaison} Macs2_Bed"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_narrowpeaks"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
+            "tool_shed_repository": {
+                "changeset_revision": "424aefbd7777",
+                "name": "macs2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"to_large\": \"false\", \"nolambda\": \"false\", \"spmr\": \"false\", \"ratio\": null, \"slocal\": null, \"llocal\": null, \"broad_options\": {\"broad_options_selector\": \"nobroad\", \"__current_case__\": 1, \"call_summits\": \"false\"}, \"keep_dup_options\": {\"keep_dup_options_selector\": \"1\", \"__current_case__\": 1}}, \"control\": {\"c_select\": \"Yes\", \"__current_case__\": 0, \"c_multiple\": {\"c_multi_select\": \"Yes\", \"__current_case__\": 1, \"input_control_file\": {\"__class__\": \"RuntimeValue\"}}}, \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"120000000\", \"__current_case__\": 2}, \"format\": \"BAM\", \"nomodel_type\": {\"nomodel_type_selector\": \"nomodel\", \"__current_case__\": 1, \"extsize\": \"200\", \"shift\": \"0\"}, \"outputs\": [\"peaks_tabular\", \"summits\"], \"treatment\": {\"t_multi_select\": \"Yes\", \"__current_case__\": 1, \"input_treatment_file\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1.20160309.6",
+            "type": "tool",
+            "uuid": "51437be4-2e62-4f4a-b945-9369c3f6a150",
+            "workflow_outputs": [
+                {
+                    "label": "MACS2 callpeak on input dataset(s) (narrow Peaks)",
+                    "output_name": "output_narrowpeaks",
+                    "uuid": "72acc71c-7da8-45c5-bf99-d5999bda68a3"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_tabular",
+                    "uuid": "bde12d03-a94e-42fc-b3f0-dd241651efb7"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_summits",
+                    "uuid": "4e9013e7-07c9-4c88-94f7-245fc5c3901b"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "2036d59a-1876-4177-8dcd-d8cafbac5d7a",
+    "version": 7
+}

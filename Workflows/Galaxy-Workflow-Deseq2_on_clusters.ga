@@ -1,0 +1,398 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Deseq2 on clusters",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Control_fasta"
+                }
+            ],
+            "label": "Control_fasta",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 582.5,
+                "height": 61,
+                "left": 438,
+                "right": 638,
+                "top": 521.5,
+                "width": 200,
+                "x": 438,
+                "y": 521.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "32f96a5f-9177-41fc-8b53-38d7dce255bd",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "fasta_file_CLUSTERS"
+                }
+            ],
+            "label": "fasta_file_CLUSTERS",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 719.5,
+                "height": 81,
+                "left": 424,
+                "right": 624,
+                "top": 638.5,
+                "width": 200,
+                "x": 424,
+                "y": 638.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "30987111-a00c-4684-ab67-f5a327b37a71",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Mutant_fasta"
+                }
+            ],
+            "label": "Mutant_fasta",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 876.5,
+                "height": 61,
+                "left": 403,
+                "right": 603,
+                "top": 815.5,
+                "width": 200,
+                "x": 403,
+                "y": 815.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "77d82565-2ffd-483f-bd01-54a6c1d5409f",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "refGenomeSource|ownFile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "sR_bowtie",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 779.5,
+                "height": 202,
+                "left": 732,
+                "right": 932,
+                "top": 577.5,
+                "width": 200,
+                "x": 732,
+                "y": 577.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "0281bb245635",
+                "name": "sr_bowtie",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional_fasta\": \"No\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"method\": \"unique\", \"output_format\": \"bam\", \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": {\"__class__\": \"ConnectedValue\"}}, \"v_mismatches\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1",
+            "type": "tool",
+            "uuid": "e2666ff0-63f3-4803-bd0f-4bca4b811dae",
+            "workflow_outputs": [
+                {
+                    "label": "Bowtie Output",
+                    "output_name": "output",
+                    "uuid": "9e922a10-c65b-40e2-b435-880905b9f0fa"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "refGenomeSource|ownFile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "sR_bowtie",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1050.5,
+                "height": 202,
+                "left": 671,
+                "right": 871,
+                "top": 848.5,
+                "width": 200,
+                "x": 671,
+                "y": 848.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "0281bb245635",
+                "name": "sr_bowtie",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional_fasta\": \"No\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"method\": \"unique\", \"output_format\": \"bam\", \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": {\"__class__\": \"ConnectedValue\"}}, \"v_mismatches\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1",
+            "type": "tool",
+            "uuid": "34dd9cd5-d3f1-4ab7-a91c-e79205aabeef",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "71db19fa-5a12-47e1-996c-9358531720cf"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/bamparse/bamparse/3.0.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_list": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Control",
+            "name": "Count alignments",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 684.5,
+                "height": 112,
+                "left": 1033,
+                "right": 1233,
+                "top": 572.5,
+                "width": 200,
+                "x": 1033,
+                "y": 572.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/bamparse/bamparse/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "8ea06787c08a",
+                "name": "bamparse",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_list\": {\"__class__\": \"ConnectedValue\"}, \"output_option\": \"multiple\", \"polarity\": \"both\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "40c57bf6-5066-4053-8d48-515b6378aff4",
+            "workflow_outputs": [
+                {
+                    "label": "Counts",
+                    "output_name": "output",
+                    "uuid": "3e19fe8c-f8d0-4173-a774-6711f1cec434"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/bamparse/bamparse/3.0.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_list": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Mutant",
+            "name": "Count alignments",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 973.5,
+                "height": 112,
+                "left": 1023,
+                "right": 1223,
+                "top": 861.5,
+                "width": 200,
+                "x": 1023,
+                "y": 861.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/bamparse/bamparse/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "8ea06787c08a",
+                "name": "bamparse",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_list\": {\"__class__\": \"ConnectedValue\"}, \"output_option\": \"multiple\", \"polarity\": \"both\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "97c97edb-8aac-4edc-a279-ea7949ef99e4",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "e749abab-87fd-4f9c-97be-28277a363233"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "select_data|rep_factorName_0|rep_factorLevel_0|countsFile": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "select_data|rep_factorName_0|rep_factorLevel_1|countsFile": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool DESeq2",
+                    "name": "batch_factors"
+                }
+            ],
+            "label": null,
+            "name": "DESeq2",
+            "outputs": [
+                {
+                    "name": "deseq_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 915.5,
+                "height": 322,
+                "left": 1323,
+                "right": 1523,
+                "top": 593.5,
+                "width": 200,
+                "x": 1323,
+                "y": 593.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActiondeseq_out": {
+                    "action_arguments": {
+                        "newname": "Deseq2${Condition}"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "deseq_out"
+                },
+                "RenameDatasetActionplots": {
+                    "action_arguments": {
+                        "newname": "Deseq2plot${Condition}"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plots"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "6a3a025714d3",
+                "name": "deseq2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"auto_mean_filter_off\": \"false\", \"batch_factors\": {\"__class__\": \"RuntimeValue\"}, \"esf\": \"\", \"fit_type\": \"1\", \"header\": \"true\", \"many_contrasts\": \"false\", \"normCounts\": \"false\", \"normRLog\": \"false\", \"normVST\": \"false\", \"outlier_filter_off\": \"false\", \"outlier_replace_off\": \"false\", \"pdf\": \"true\", \"select_data\": {\"how\": \"datasets_per_level\", \"__current_case__\": 1, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"FactorName\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"Mutant\", \"countsFile\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"factorLevel\": \"Control\", \"countsFile\": {\"__class__\": \"ConnectedValue\"}}]}]}, \"tximport\": {\"tximport_selector\": \"count\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.11.40.6+galaxy1",
+            "type": "tool",
+            "uuid": "0d32903a-013d-4503-a0cd-946cbaa79058",
+            "workflow_outputs": [
+                {
+                    "label": "DESeq2 plots on input dataset(s)",
+                    "output_name": "plots",
+                    "uuid": "30b85007-c2a1-4f17-8d79-9bbef17e5da1"
+                },
+                {
+                    "label": "DESeq2 result file on input dataset(s)",
+                    "output_name": "deseq_out",
+                    "uuid": "977e5902-a8a2-46f7-9ef6-cb86af423559"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "4b431a82-a8a4-4e16-a4fe-72d0dd85e6eb",
+    "version": 4
+}

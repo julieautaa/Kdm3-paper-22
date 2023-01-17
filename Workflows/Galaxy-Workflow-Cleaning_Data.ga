@@ -1,0 +1,261 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Cleaning_Data",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 268.5,
+                "height": 61,
+                "left": 194,
+                "right": 394,
+                "top": 207.5,
+                "width": 200,
+                "x": 194,
+                "y": 207.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "fa1e49c4-671a-453f-aa3b-033f7cb7f358",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1ecbdd1a-6935-4e6f-8b6e-b8c5b5cf4569"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 467,
+                "height": 81,
+                "left": 186.5,
+                "right": 386.5,
+                "top": 386,
+                "width": 200,
+                "x": 186.5,
+                "y": 386
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "e4538337-9765-4169-8bc9-c1461e81a862",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_type|fastq_input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA",
+                    "name": "input_type"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA",
+                    "name": "reference_source"
+                }
+            ],
+            "label": null,
+            "name": "Map with BWA",
+            "outputs": [
+                {
+                    "name": "bam_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 351,
+                "height": 182,
+                "left": 447.5,
+                "right": 647.5,
+                "top": 169,
+                "width": 200,
+                "x": 447.5,
+                "y": 169
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4",
+            "tool_shed_repository": {
+                "changeset_revision": "8d2a528a9513",
+                "name": "bwa",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"full\", \"__current_case__\": 1, \"n\": \"0.04\", \"o\": \"1\", \"e\": \"-1\", \"i\": \"5\", \"d\": \"10\", \"l\": \"32\", \"k\": \"2\", \"m\": \"2000000\", \"M\": \"3\", \"O\": \"11\", \"E\": \"4\", \"R\": \"30\", \"q\": \"0\", \"B\": null, \"L\": null}, \"input_type\": {\"input_type_selector\": \"single\", \"__current_case__\": 2, \"fastq_input1\": {\"__class__\": \"RuntimeValue\"}, \"adv_se_options\": {\"adv_se_options_selector\": \"do_not_set\", \"__current_case__\": 1}}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"RuntimeValue\"}, \"index_a\": \"auto\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.17.4",
+            "type": "tool",
+            "uuid": "c63ed3b3-d10c-472e-b7de-cbc718272301",
+            "workflow_outputs": [
+                {
+                    "label": "Map with BWA on input dataset(s) (mapped reads in BAM format)",
+                    "output_name": "bam_output",
+                    "uuid": "a9c9e12a-244c-4218-8167-e07045e83538"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicatesWithMateCigar/2.18.2.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "inputFile": {
+                    "id": 2,
+                    "output_name": "bam_output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MarkDuplicatesWithMateCigar",
+                    "name": "assume_sorted"
+                }
+            ],
+            "label": null,
+            "name": "MarkDuplicatesWithMateCigar",
+            "outputs": [
+                {
+                    "name": "metrics_file",
+                    "type": "txt"
+                },
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 575.5,
+                "height": 302,
+                "left": 694.5,
+                "right": 894.5,
+                "top": 273.5,
+                "width": 200,
+                "x": 694.5,
+                "y": 273.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicatesWithMateCigar/2.18.2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "a1f0b3f4b781",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"assume_sorted\": {\"__class__\": \"RuntimeValue\"}, \"comment\": \"\", \"duplicate_scoring_strategy\": \"TOTAL_MAPPED_REFERENCE_LENGTH\", \"inputFile\": {\"__class__\": \"ConnectedValue\"}, \"minimum_distance\": \"-1\", \"optical_duplicate_pixel_distance\": \"100\", \"read_name_regex\": \"[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*.\", \"remove_duplicates\": \"false\", \"skip_pairs_with_no_mate_cigar\": \"true\", \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.18.2.1",
+            "type": "tool",
+            "uuid": "bf9efb6c-4af4-4ea3-8e28-8f3daea963e7",
+            "workflow_outputs": [
+                {
+                    "label": "MarkDuplicatesWithMateCigar on input dataset(s): MarkDuplicates BAM output",
+                    "output_name": "outFile",
+                    "uuid": "9e09c52c-6631-41d9-9d9d-b782981c4ddd"
+                },
+                {
+                    "label": "MarkDuplicatesWithMateCigar on input dataset(s): MarkDuplicate metrics",
+                    "output_name": "metrics_file",
+                    "uuid": "3eb86805-ad14-49d9-95b2-fe215c13e0e4"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "bed_file"
+                }
+            ],
+            "label": null,
+            "name": "Filter SAM or BAM, output SAM or BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "bottom": 718.5,
+                "height": 242,
+                "left": 969.5,
+                "right": 1169.5,
+                "top": 476.5,
+                "width": 200,
+                "x": 969.5,
+                "y": 476.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "${Collection_label} Clean"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8",
+            "tool_shed_repository": {
+                "changeset_revision": "56c31114ad4a",
+                "name": "samtool_filter2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bed_file\": {\"__class__\": \"RuntimeValue\"}, \"flag\": {\"filter\": \"yes\", \"__current_case__\": 1, \"reqBits\": null, \"skipBits\": [\"0x0004\", \"0x0400\"]}, \"header\": \"-h\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"library\": \"\", \"mapq\": null, \"outputtype\": \"bam\", \"possibly_select_inverse\": \"false\", \"read_group\": \"\", \"regions\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.8",
+            "type": "tool",
+            "uuid": "a1cfb319-5cf8-4b44-b9ed-19ea089b069a",
+            "workflow_outputs": [
+                {
+                    "label": "Filter SAM or BAM, output SAM or BAM on input dataset(s): bam",
+                    "output_name": "output1",
+                    "uuid": "f721d67a-38fa-41f9-a1e4-8d4b78f767aa"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "9e07e886-7be7-4163-ab2d-4d49643e13af",
+    "version": 14
+}

@@ -1,0 +1,518 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "23-29nt clean",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "miRNA"
+                }
+            ],
+            "label": "miRNA",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 398.578125,
+                "height": 61.78125,
+                "left": -212,
+                "right": -12,
+                "top": 336.796875,
+                "width": 200,
+                "x": -212,
+                "y": 336.796875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "7a524d64-3382-4d4e-aa24-b6dcab1563ea",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "miscRNA"
+                }
+            ],
+            "label": "miscRNA",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 548.578125,
+                "height": 61.78125,
+                "left": 81,
+                "right": 281,
+                "top": 486.796875,
+                "width": 200,
+                "x": 81,
+                "y": 486.796875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "336f5c1f-b30e-4a20-b777-4766c7a31b11",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "rRNA"
+                }
+            ],
+            "label": "rRNA",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 115.578125,
+                "height": 61.78125,
+                "left": -530,
+                "right": -330,
+                "top": 53.796875,
+                "width": 200,
+                "x": -530,
+                "y": 53.796875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b3145033-a87d-4045-a81a-a6799428ff0b",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "clipped dataset"
+                }
+            ],
+            "label": "clipped dataset",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": -186.21875,
+                "height": 61.78125,
+                "left": -587,
+                "right": -387,
+                "top": -248,
+                "width": 200,
+                "x": -587,
+                "y": -248
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "747b5ec7-a2e3-4e83-b494-9c195ee79796",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "tRNA"
+                }
+            ],
+            "label": "tRNA",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 646.578125,
+                "height": 61.78125,
+                "left": 428,
+                "right": 628,
+                "top": 584.796875,
+                "width": 200,
+                "x": 428,
+                "y": 584.796875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e2bf1001-3a2c-4a62-b7d6-2b0453553808",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "refGenomeSource|ownFile": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "refGenomeSource"
+                }
+            ],
+            "label": "Unaligned rRNA",
+            "name": "sR_bowtie",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "unaligned",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 177.703125,
+                "height": 255.90625,
+                "left": -291,
+                "right": -91,
+                "top": -78.203125,
+                "width": 200,
+                "x": -291,
+                "y": -78.203125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionunaligned": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "unaligned"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "0281bb245635",
+                "name": "sr_bowtie",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional_fasta\": \"unal\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"method\": \"k_option\", \"output_format\": \"tabular\", \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": {\"__class__\": \"RuntimeValue\"}}, \"v_mismatches\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1",
+            "type": "tool",
+            "uuid": "8941efcc-1f5d-4189-af35-821f49e362a1",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "unaligned"
+                },
+                "refGenomeSource|ownFile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "refGenomeSource"
+                }
+            ],
+            "label": "Unaligned miRNA",
+            "name": "sR_bowtie",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "unaligned",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 366.09375,
+                "height": 276.296875,
+                "left": 41,
+                "right": 241,
+                "top": 89.796875,
+                "width": 200,
+                "x": 41,
+                "y": 89.796875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionunaligned": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "unaligned"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "0281bb245635",
+                "name": "sr_bowtie",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional_fasta\": \"unal\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"method\": \"k_option\", \"output_format\": \"tabular\", \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": {\"__class__\": \"RuntimeValue\"}}, \"v_mismatches\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1",
+            "type": "tool",
+            "uuid": "4e6c687a-98d3-431d-aabd-1a9d44d799fe",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "unaligned"
+                },
+                "refGenomeSource|ownFile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "refGenomeSource"
+                }
+            ],
+            "label": "Unaligned miscRNA",
+            "name": "sR_bowtie",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "unaligned",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 415.09375,
+                "height": 276.296875,
+                "left": 313,
+                "right": 513,
+                "top": 138.796875,
+                "width": 200,
+                "x": 313,
+                "y": 138.796875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionunaligned": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "unaligned"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "0281bb245635",
+                "name": "sr_bowtie",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional_fasta\": \"unal\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"method\": \"k_option\", \"output_format\": \"tabular\", \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": {\"__class__\": \"RuntimeValue\"}}, \"v_mismatches\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1",
+            "type": "tool",
+            "uuid": "e83173e9-8c16-45ea-8ce0-1cd4c8e95563",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "unaligned"
+                },
+                "refGenomeSource|ownFile": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool sR_bowtie",
+                    "name": "refGenomeSource"
+                }
+            ],
+            "label": "Unaligned tRNA = piRNA",
+            "name": "sR_bowtie",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "unaligned",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 436.296875,
+                "height": 276.296875,
+                "left": 626,
+                "right": 826,
+                "top": 160,
+                "width": 200,
+                "x": 626,
+                "y": 160
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/artbio/sr_bowtie/bowtieForSmallRNA/2.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "0281bb245635",
+                "name": "sr_bowtie",
+                "owner": "artbio",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional_fasta\": \"unal\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"method\": \"k_option\", \"output_format\": \"tabular\", \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": {\"__class__\": \"RuntimeValue\"}}, \"v_mismatches\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1",
+            "type": "tool",
+            "uuid": "f3b7b399-30cd-4d39-a542-fea8172e47a1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "unaligned",
+                    "uuid": "dbfa2099-bbb4-4ab8-bbad-5b4acfd67556"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/drosofff/yac_clipper/yac/1.3.6",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "unaligned"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Clip adapter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 315.671875,
+                "height": 93.171875,
+                "left": 863,
+                "right": 1063,
+                "top": 222.5,
+                "width": 200,
+                "x": 863,
+                "y": 222.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "unique_23-29 dm6 ${Condition}"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/drosofff/yac_clipper/yac/1.3.6",
+            "tool_shed_repository": {
+                "changeset_revision": "a18edcf9c7ed",
+                "name": "yac_clipper",
+                "owner": "drosofff",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"Nmode\": \"accept\", \"clip_source\": {\"clip_source_list\": \"prebuilt\", \"__current_case__\": 0, \"clip_sequence\": \"TGGAATTCTCGGGTGCCAAG\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"max\": \"29\", \"min\": \"23\", \"out_format\": \"fasta\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.6",
+            "type": "tool",
+            "uuid": "b0b5d0a3-5d37-40f4-a7b8-3384de080b46",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "d512905f-7b04-4819-812e-993d75012cd7"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "a99c0189-25b3-443a-923a-bfb614b4b103",
+    "version": 9
+}
