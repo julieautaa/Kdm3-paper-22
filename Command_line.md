@@ -39,27 +39,36 @@ python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/devteam/cluster/056
 
 # Small RNA profile figure 3b
 
+```
 sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354942.dat' -o 'Control1' && samtools index 'Control1' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354943.dat' -o 'Control3' && samtools index 'Control3' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354944.dat' -o 'Control3' && samtools index 'Control3' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354945.dat' -o 'Mutant1' && samtools index 'Mutant1' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354946.dat' -o 'Mutant3' && samtools index 'Mutant3' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354947.dat' -o 'Mutant2' && samtools index 'Mutant2' && python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_maps/f2e7ad3058e8/small_rna_maps'/small_rna_maps.py --inputs "Control1" "Control3" "Control3" "Mutant1" "Mutant3" "Mutant2"       --sample_names "Control1" "Control3" "Control3" "Mutant1" "Mutant3" "Mutant2" --minsize 18 --maxsize 29 --plot_methods 'Counts' 'Size' --outputs '/home/galaxy/galaxy/database/datasets/000/355/dataset_355049.dat' '/home/galaxy/galaxy/database/datasets/000/355/dataset_355050.dat' &&   Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_maps/f2e7ad3058e8/small_rna_maps'/small_rna_maps.r --first_dataframe '/home/galaxy/galaxy/database/datasets/000/355/dataset_355049.dat' --extra_dataframe '/home/galaxy/galaxy/database/datasets/000/355/dataset_355050.dat' --normalization "1 1 1 1 1 1" --ymin '' --ymax '' --first_plot_method 'Counts' --extra_plot_method 'Size' --output_pdf '/home/galaxy/galaxy/database/datasets/000/355/dataset_355051.dat'
+```
 
-1U enrichment 
+## 1U enrichment 
 
+```
 sed -r --sandbox -e 's/T/U/g' '/home/galaxy/galaxy/database/datasets/000/354/dataset_354780.dat' > '/home/galaxy/galaxy/database/datasets/000/354/dataset_354784.dat'
-
+```
+```
 grep -P -A 0 -B 0  -i -- "^U"
-
+```
+```
 echo "#lines" > /home/galaxy/galaxy/database/datasets/000/355/dataset_355043.dat &&  cat '/home/galaxy/galaxy/database/datasets/000/355/dataset_355031.dat' | wc -l | awk '{ print $1 }' >> /home/galaxy/galaxy/database/datasets/000/355/dataset_355043.dat
+```
 
+## Weblogo  
 
-Weblogo pairable figure 3c 
-
+```
 samtools index '/home/galaxy/galaxy/database/datasets/000/354/dataset_354763.dat' && python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_signatures/68ee7c84d498/small_rna_signatures'/overlapping_reads.py --input '/home/galaxy/galaxy/database/datasets/000/354/dataset_354763.dat' --minquery '23' --maxquery '29' --mintarget '23' --maxtarget '29' --overlap '10' --output '/home/galaxy/galaxy/database/datasets/000/354/dataset_354776.dat'
-
+```
+```
 cat '/home/galaxy/galaxy/database/datasets/000/354/dataset_354776.dat' | fastx_trimmer -v -f 1 -l 23         > '/home/galaxy/galaxy/database/datasets/000/354/dataset_354780.dat'
-
+```
+```
 sed -r --sandbox -e 's/T/U/g' '/home/galaxy/galaxy/database/datasets/000/354/dataset_354780.dat' > '/home/galaxy/galaxy/database/datasets/000/354/dataset_354784.dat'
-
+```
+```
 weblogo -u 10 --yaxis 0.7  --size large --title Control1  --errorbars NO --ticmarks 0.1 </Users/Julie/Desktop/fasta.23-29/paired_control1.fasta > paired_control1.eps
-![image](https://user-images.githubusercontent.com/122443584/212908774-65e4c2f6-94d1-4dd8-bfd7-3558abeaa21d.png)
+```
 
 
 
