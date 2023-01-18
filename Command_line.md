@@ -70,6 +70,49 @@ sed -r --sandbox -e 's/T/U/g' '/home/galaxy/galaxy/database/datasets/000/354/dat
 weblogo -u 10 --yaxis 0.7  --size large --title Control1  --errorbars NO --ticmarks 0.1 </Users/Julie/Desktop/fasta.23-29/paired_control1.fasta > paired_control1.eps
 ```
 
+## Z-score
+
+Z-score
+
+```
+bowtie-build -f /home/galaxy/galaxy/database/datasets/000/420/dataset_420433.dat genome 1>/dev/null && ln -s -f '/home/galaxy/galaxy/database/datasets/000/420/dataset_420433.dat' genome.fa &&     bowtie -p ${GALAXY_SLOTS:-4}  -v 0 -k 1 --best  --al /home/galaxy/galaxy/database/datasets/000/420/dataset_420435.dat   -S genome -f '/home/galaxy/galaxy/database/datasets/000/331/dataset_331349.dat'| samtools view -u - | samtools sort -@ "${GALAXY_SLOTS:-4}" -T tmp -O bam -o /home/galaxy/galaxy/database/datasets/000/420/dataset_420434.dat 2>&1
+```
+```
+samtools index '/home/galaxy/galaxy/database/datasets/000/421/dataset_421481.dat' && python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_signatures/68ee7c84d498/small_rna_signatures'/signature.py --input '/home/galaxy/galaxy/database/datasets/000/421/dataset_421481.dat' --minquery '23' --maxquery '29' --mintarget '23' --maxtarget '29' --minscope '1' --maxscope '26' --output_h '/home/galaxy/galaxy/database/datasets/000/421/dataset_421485.dat' --output_z '/home/galaxy/galaxy/database/datasets/000/421/dataset_421484.dat' && Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_signatures/68ee7c84d498/small_rna_signatures'/signature.r --h_dataframe '/home/galaxy/galaxy/database/datasets/000/421/dataset_421485.dat' --z_dataframe '/home/galaxy/galaxy/database/datasets/000/421/dataset_421484.dat' --plot_method 'global' --pdf '/home/galaxy/galaxy/database/datasets/000/421/dataset_421486.dat' --title "Overlap Signatures of 23-29 against 23-29nt small RNAs"
+```
+```
+bowtie-build -f /home/galaxy/galaxy/database/datasets/000/420/dataset_420433.dat genome 1>/dev/null && ln -s -f '/home/galaxy/galaxy/database/datasets/000/420/dataset_420433.dat' genome.fa &&     bowtie -p ${GALAXY_SLOTS:-4}  -v 0 -k 1 --best  --al /home/galaxy/galaxy/database/datasets/000/420/dataset_420435.dat   -S genome -f '/home/galaxy/galaxy/database/datasets/000/331/dataset_331349.dat'| samtools view -u - | samtools sort -@ "${GALAXY_SLOTS:-4}" -T tmp -O bam -o /home/galaxy/galaxy/database/datasets/000/420/dataset_420434.dat 2>&1
+```
+```
+samtools index '/home/galaxy/galaxy/database/datasets/000/421/dataset_421481.dat' && python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_signatures/68ee7c84d498/small_rna_signatures'/signature.py --input '/home/galaxy/galaxy/database/datasets/000/421/dataset_421481.dat' --minquery '23' --maxquery '29' --mintarget '23' --maxtarget '29' --minscope '1' --maxscope '26' --output_h '/home/galaxy/galaxy/database/datasets/000/421/dataset_421485.dat' --output_z '/home/galaxy/galaxy/database/datasets/000/421/dataset_421484.dat' && Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_signatures/68ee7c84d498/small_rna_signatures'/signature.r --h_dataframe '/home/galaxy/galaxy/database/datasets/000/421/dataset_421485.dat' --z_dataframe '/home/galaxy/galaxy/database/datasets/000/421/dataset_421484.dat' --plot_method 'global' --pdf '/home/galaxy/galaxy/database/datasets/000/421/dataset_421486.dat' --title "Overlap Signatures of 23-29 against 23-29nt small RNAs"
+```
+# Figure 3d
+
+## DESEQ2 on genes all 23-29 nt small seq
+
+```
+bowtie -p ${GALAXY_SLOTS:-4}  -v 0 -k 1 --best   -S /home/galaxy/galaxy/tool-data/dm6/bowtie_index/dm6.fa -f '/home/galaxy/galaxy/database/datasets/000/331/dataset_331322.dat'| samtools view -u - | samtools sort -@ "${GALAXY_SLOTS:-4}" -T tmp -O bam -o /home/galaxy/galaxy/database/datasets/000/353/dataset_353653.dat 2>&1
+```
+```
+export FC_PATH=$(command -v featureCounts | sed 's@/bin/featureCounts$@@') &&  featureCounts  -a '/home/galaxy/galaxy/database/datasets/000/353/dataset_353639.dat' -F "GTF"  -o "output" -T ${GALAXY_SLOTS:-2}  -s  0 -t 'exon' -g 'gene_id'            -Q  12  --minOverlap  1 --fracOverlap 0 --fracOverlapFeature 0          -C  '/home/galaxy/galaxy/database/datasets/000/353/dataset_353690.dat'  && grep -v "^#" "output" | sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353690.dat|Bowtie Output|g' > body.txt && cut -f 1,7 body.txt > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353699.dat'    && sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353690.dat|Bowtie Output|g' 'output.summary' > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353700.dat'
+```
+```
+cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/get_deseq_dataset.R' > /dev/null &&  Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/deseq2.R' --cores ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353705.dat' -p '/home/galaxy/galaxy/database/datasets/000/353/dataset_353706.dat'                  -H  -f '[["FactorName", [{"Control": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353693.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353695.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353697.dat"]}, {"Mutant": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353699.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353701.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353703.dat"]}]]]' -l '{"dataset_353699.dat": "Mutant1 SM seq", "dataset_353701.dat": "Mutant2 SM seq", "dataset_353703.dat": "Mutant3 SM seq", "dataset_353693.dat": "Control1 SM seq", "dataset_353695.dat": "Control2 SM seq", "dataset_353697.dat": "Control3 SM seq"}' -t 1
+```
+
+## DESEQ2 on genes RNA seq
+
+```ln -s '/home/galaxy/galaxy/database/datasets/000/353/dataset_353640.dat' input.fa && samtools faidx input.fa &&  samtools view -b -@ ${GALAXY_SLOTS:-1} -t input.fa.fai '/home/galaxy/galaxy/database/datasets/000/353/dataset_353424.dat' |  samtools sort -O bam -@ ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353646.dat' -T temp
+```
+```
+ln -s '/home/galaxy/galaxy/database/datasets/000/353/dataset_353641.dat' input.bam && ln -s '/home/galaxy/galaxy/database/datasets/_metadata_files/068/metadata_68275.dat' input.bai && samtools view -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353647.dat' -h   -b  -F 0x404 input.bam
+```
+```
+export FC_PATH=$(command -v featureCounts | sed 's@/bin/featureCounts$@@') &&  featureCounts  -a '/home/galaxy/galaxy/database/datasets/000/353/dataset_353639.dat' -F "GTF"  -o "output" -T ${GALAXY_SLOTS:-2}  -s  0 -t 'exon' -g 'gene_id'            -Q  12  --minOverlap  1 --fracOverlap 0 --fracOverlapFeature 0          -C  '/home/galaxy/galaxy/database/datasets/000/353/dataset_353648.dat'  && grep -v "^#" "output" | sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353648.dat|Filter SAM or BAM, output SAM or BAM on data 16: bam|g' > body.txt && cut -f 1,7 body.txt > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353673.dat'    && sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353648.dat|Filter SAM or BAM, output SAM or BAM on data 16: bam|g' 'output.summary' > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353674.dat'
+```
+```
+cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/get_deseq_dataset.R' > /dev/null &&  Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/deseq2.R' --cores ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353824.dat' -p '/home/galaxy/galaxy/database/datasets/000/353/dataset_353825.dat'                  -H  -f '[["FactorName", [{"Control": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353818.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353820.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353822.dat"]}, {"Mutant": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353812.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353814.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353816.dat"]}]]]' -l '{"dataset_353812.dat": "Mutant1 RNA", "dataset_353814.dat": "Mutant2 RNA", "dataset_353816.dat": "Mutant3 RNA", "dataset_353818.dat": "Control1 RNA", "dataset_353820.dat": "Control2 RNA", "dataset_353822.dat": "Control3 RNA"}' -t 1
+```
 
 
 # UCSC views figure 3i and extended data figure 4
