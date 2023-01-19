@@ -87,9 +87,11 @@ python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/devteam/cluster/056
 ![image](https://user-images.githubusercontent.com/122443584/212908244-b22c9300-a3de-48fe-8e0e-767fc6f11c91.png)
 ```
 
-# Figure 3d
 
-## DESEQ2 on genes all 23-29 nt small seq
+
+# DESEQ2 on genes (Figure 3, 5, S5)
+
+# All 23-29nt 
 
 ```
 bowtie -p ${GALAXY_SLOTS:-4}  -v 0 -k 1 --best   -S /home/galaxy/galaxy/tool-data/dm6/bowtie_index/dm6.fa -f '/home/galaxy/galaxy/database/datasets/000/331/dataset_331322.dat'| samtools view -u - | samtools sort -@ "${GALAXY_SLOTS:-4}" -T tmp -O bam -o /home/galaxy/galaxy/database/datasets/000/353/dataset_353653.dat 2>&1
@@ -101,7 +103,7 @@ export FC_PATH=$(command -v featureCounts | sed 's@/bin/featureCounts$@@') &&  f
 cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/get_deseq_dataset.R' > /dev/null &&  Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/deseq2.R' --cores ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353705.dat' -p '/home/galaxy/galaxy/database/datasets/000/353/dataset_353706.dat'                  -H  -f '[["FactorName", [{"Control": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353693.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353695.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353697.dat"]}, {"Mutant": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353699.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353701.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353703.dat"]}]]]' -l '{"dataset_353699.dat": "Mutant1 SM seq", "dataset_353701.dat": "Mutant2 SM seq", "dataset_353703.dat": "Mutant3 SM seq", "dataset_353693.dat": "Control1 SM seq", "dataset_353695.dat": "Control2 SM seq", "dataset_353697.dat": "Control3 SM seq"}' -t 1
 ```
 
-## DESEQ2 on genes RNA seq
+## RNA seq
 
 ```ln -s '/home/galaxy/galaxy/database/datasets/000/353/dataset_353640.dat' input.fa && samtools faidx input.fa &&  samtools view -b -@ ${GALAXY_SLOTS:-1} -t input.fa.fai '/home/galaxy/galaxy/database/datasets/000/353/dataset_353424.dat' |  samtools sort -O bam -@ ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353646.dat' -T temp
 ```
@@ -116,9 +118,11 @@ cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10ee
 ```
 
 
-# UCSC views figure 3i and extended data figure 4
+# UCSC views (figure 3, 5, S6, S7)
 
-## Coverage small-seq 23-29 uniquer mapper Ctrl
+## Coverage small-seq 23-29 unique mapper
+
+bin size and scaling factor may vary depending on sample and sequencing method (small RNA bin size = 29, RNA bin size = 100, ChIP bin size = 100)
 
 ```
 ln -s '/home/galaxy/galaxy/database/datasets/000/378/dataset_378805.dat' one.bam && ln -s '/home/galaxy/galaxy/database/datasets/_metadata_files/072/metadata_72363.dat' one.bam.bai &&  bamCoverage --numberOfProcessors "${GALAXY_SLOTS:-4}"  --bam one.bam --outFileName '/home/galaxy/galaxy/database/datasets/000/414/dataset_414114.dat' --outFileFormat 'bigwig'  --binSize 29   --exactScaling  --scaleFactor 0.034      --minMappingQuality '1'
