@@ -48,7 +48,7 @@ bowtie-build -f /home/galaxy/galaxy/database/datasets/000/420/dataset_420433.dat
 samtools index '/home/galaxy/galaxy/database/datasets/000/421/dataset_421481.dat' && python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_signatures/68ee7c84d498/small_rna_signatures'/signature.py --input '/home/galaxy/galaxy/database/datasets/000/421/dataset_421481.dat' --minquery '23' --maxquery '29' --mintarget '23' --maxtarget '29' --minscope '1' --maxscope '26' --output_h '/home/galaxy/galaxy/database/datasets/000/421/dataset_421485.dat' --output_z '/home/galaxy/galaxy/database/datasets/000/421/dataset_421484.dat' && Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_signatures/68ee7c84d498/small_rna_signatures'/signature.r --h_dataframe '/home/galaxy/galaxy/database/datasets/000/421/dataset_421485.dat' --z_dataframe '/home/galaxy/galaxy/database/datasets/000/421/dataset_421484.dat' --plot_method 'global' --pdf '/home/galaxy/galaxy/database/datasets/000/421/dataset_421486.dat' --title "Overlap Signatures of 23-29 against 23-29nt small RNAs"
 ```
 
-# Regions identification (figure 3a and extended data table 4
+# Regions identification (figure 3 and table S4)
 
 ## Match unique mappers on fragmented 1kb dm6
 
@@ -89,9 +89,9 @@ python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/devteam/cluster/056
 
 
 
-# DESEQ2 on genes (Figure 3, 5, S5)
+# DESEQ2 on genes (Figure 3, 5, S5, S8, S10)
 
-# All 23-29nt 
+# 23-29nt 
 
 ```
 bowtie -p ${GALAXY_SLOTS:-4}  -v 0 -k 1 --best   -S /home/galaxy/galaxy/tool-data/dm6/bowtie_index/dm6.fa -f '/home/galaxy/galaxy/database/datasets/000/331/dataset_331322.dat'| samtools view -u - | samtools sort -@ "${GALAXY_SLOTS:-4}" -T tmp -O bam -o /home/galaxy/galaxy/database/datasets/000/353/dataset_353653.dat 2>&1
@@ -118,13 +118,13 @@ cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10ee
 ```
 
 
-# UCSC views (figure 3, 5, S6, S7)
+# UCSC views (figure 3, 5, S6, S7, S9)
 
-## Coverage small-seq 23-29 unique mapper
+## Coverage 
 
-bin size and scaling factor may vary depending on sample and sequencing method (small RNA bin size = 29, RNA bin size = 100, ChIP bin size = 100)
+bin size and scaling factor may vary depending on sample and sequencing method (small RNA bin size = 30, RNA bin size = 100, ChIP bin size = 100) scaling factors are reported in table S2
 
 ```
-ln -s '/home/galaxy/galaxy/database/datasets/000/378/dataset_378805.dat' one.bam && ln -s '/home/galaxy/galaxy/database/datasets/_metadata_files/072/metadata_72363.dat' one.bam.bai &&  bamCoverage --numberOfProcessors "${GALAXY_SLOTS:-4}"  --bam one.bam --outFileName '/home/galaxy/galaxy/database/datasets/000/414/dataset_414114.dat' --outFileFormat 'bigwig'  --binSize 29   --exactScaling  --scaleFactor 0.034      --minMappingQuality '1'
+ln -s '/home/galaxy/galaxy/database/datasets/000/378/dataset_378805.dat' one.bam && ln -s '/home/galaxy/galaxy/database/datasets/_metadata_files/072/metadata_72363.dat' one.bam.bai &&  bamCoverage --numberOfProcessors "${GALAXY_SLOTS:-4}"  --bam one.bam --outFileName '/home/galaxy/galaxy/database/datasets/000/414/dataset_414114.dat' --outFileFormat 'bigwig'  --binSize 30   --exactScaling  --scaleFactor 0.034      --minMappingQuality '1'
 ![image](https://user-images.githubusercontent.com/122443584/212907365-6e354d73-1341-4f13-a140-691ed4e0c86e.png)
 ```
