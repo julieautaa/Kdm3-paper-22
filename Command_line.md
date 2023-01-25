@@ -33,9 +33,9 @@ sed -r --sandbox -e 's/T/U/g' '/home/galaxy/galaxy/database/datasets/000/354/dat
 weblogo -u 10 --yaxis 0.7  --size large --title Control1  --errorbars NO --ticmarks 0.1 </Users/Julie/Desktop/fasta.23-29/paired_control1.fasta > paired_control1.eps
 ```
 
-## Z-score
+## 5' Overlap probability z-score
 
-Z-score
+
 
 ```
 bowtie-build -f /home/galaxy/galaxy/database/datasets/000/420/dataset_420433.dat genome 1>/dev/null && ln -s -f '/home/galaxy/galaxy/database/datasets/000/420/dataset_420433.dat' genome.fa &&     bowtie -p ${GALAXY_SLOTS:-4}  -v 0 -k 1 --best  --al /home/galaxy/galaxy/database/datasets/000/420/dataset_420435.dat   -S genome -f '/home/galaxy/galaxy/database/datasets/000/331/dataset_331349.dat'| samtools view -u - | samtools sort -@ "${GALAXY_SLOTS:-4}" -T tmp -O bam -o /home/galaxy/galaxy/database/datasets/000/420/dataset_420434.dat 2>&1
@@ -64,7 +64,7 @@ bowtie-build -f /home/galaxy/galaxy/database/datasets/000/354/dataset_354387.dat
 mkdir outputdir && sambamba view -t $GALAXY_SLOTS -F "not unmapped" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354390.dat' -o 'Control3 on fragmented' && samtools index 'Control3 on fragmented' && python /home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/bamparse/8ea06787c08a/bamparse/bamparse.py --alignments 'Control3 on fragmented' --labels 'Control3 on fragmented' --number 'multiple'
 ```
 
-## DEseq2 analysis
+## DESeq2 analysis
 
 ```
 cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/d027d1f4984e/deseq2/get_deseq_dataset.R' > /dev/null &&  Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/d027d1f4984e/deseq2/deseq2.R' --cores ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/354/dataset_354403.dat' -p '/home/galaxy/galaxy/database/datasets/000/354/dataset_354404.dat' -A 0.1                  -H  -f '[["FactorName", [{"Control": ["/home/galaxy/galaxy/database/datasets/000/354/dataset_354397.dat", "/home/galaxy/galaxy/database/datasets/000/354/dataset_354398.dat", "/home/galaxy/galaxy/database/datasets/000/354/dataset_354399.dat"]}, {"Mutant": ["/home/galaxy/galaxy/database/datasets/000/354/dataset_354400.dat", "/home/galaxy/galaxy/database/datasets/000/354/dataset_354401.dat", "/home/galaxy/galaxy/database/datasets/000/354/dataset_354402.dat"]}]]]' -l '{"dataset_354400.dat": "Counts mutant1 fragmented (table0)", "dataset_354401.dat": "Counts mutant2 fragmented", "dataset_354402.dat": "Counts mutant3 fragmented (table0)", "dataset_354397.dat": "Counts control1 fragmented (table0)", "dataset_354398.dat": "Counts control2 fragmented (table0)", "dataset_354399.dat": "Counts control3 fragmented (table0)"}' -t 1
@@ -91,7 +91,7 @@ python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/devteam/cluster/056
 
 
 
-# DESEQ2 on genes (Figure 3, 5, S5, S8, S10)
+# DESeq2 on genes (Figure 3, 5, S5, S8, S10)
 
 
 ```
