@@ -1,4 +1,6 @@
-# Small RNA profile (figure 1, 3, 5, S3)
+# piRNA profile (figure 1, 3, 5, S3)
+
+## Size distribution
 
 ```
 sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354942.dat' -o 'Control1' && samtools index 'Control1' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354943.dat' -o 'Control3' && samtools index 'Control3' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354944.dat' -o 'Control3' && samtools index 'Control3' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354945.dat' -o 'Mutant1' && samtools index 'Mutant1' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354946.dat' -o 'Mutant3' && samtools index 'Mutant3' && sambamba view -t ${GALAXY_SLOTS} -F "not unmapped and sequence_length >= 18 and sequence_length <= 29" -f bam '/home/galaxy/galaxy/database/datasets/000/354/dataset_354947.dat' -o 'Mutant2' && samtools index 'Mutant2' && python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_maps/f2e7ad3058e8/small_rna_maps'/small_rna_maps.py --inputs "Control1" "Control3" "Control3" "Mutant1" "Mutant3" "Mutant2"       --sample_names "Control1" "Control3" "Control3" "Mutant1" "Mutant3" "Mutant2" --minsize 18 --maxsize 29 --plot_methods 'Counts' 'Size' --outputs '/home/galaxy/galaxy/database/datasets/000/355/dataset_355049.dat' '/home/galaxy/galaxy/database/datasets/000/355/dataset_355050.dat' &&   Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/artbio/small_rna_maps/f2e7ad3058e8/small_rna_maps'/small_rna_maps.r --first_dataframe '/home/galaxy/galaxy/database/datasets/000/355/dataset_355049.dat' --extra_dataframe '/home/galaxy/galaxy/database/datasets/000/355/dataset_355050.dat' --normalization "1 1 1 1 1 1" --ymin '' --ymax '' --first_plot_method 'Counts' --extra_plot_method 'Size' --output_pdf '/home/galaxy/galaxy/database/datasets/000/355/dataset_355051.dat'
@@ -91,30 +93,12 @@ python '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/devteam/cluster/056
 
 # DESEQ2 on genes (Figure 3, 5, S5, S8, S10)
 
-# 23-29nt 
 
-```
-bowtie -p ${GALAXY_SLOTS:-4}  -v 0 -k 1 --best   -S /home/galaxy/galaxy/tool-data/dm6/bowtie_index/dm6.fa -f '/home/galaxy/galaxy/database/datasets/000/331/dataset_331322.dat'| samtools view -u - | samtools sort -@ "${GALAXY_SLOTS:-4}" -T tmp -O bam -o /home/galaxy/galaxy/database/datasets/000/353/dataset_353653.dat 2>&1
-```
 ```
 export FC_PATH=$(command -v featureCounts | sed 's@/bin/featureCounts$@@') &&  featureCounts  -a '/home/galaxy/galaxy/database/datasets/000/353/dataset_353639.dat' -F "GTF"  -o "output" -T ${GALAXY_SLOTS:-2}  -s  0 -t 'exon' -g 'gene_id'            -Q  12  --minOverlap  1 --fracOverlap 0 --fracOverlapFeature 0          -C  '/home/galaxy/galaxy/database/datasets/000/353/dataset_353690.dat'  && grep -v "^#" "output" | sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353690.dat|Bowtie Output|g' > body.txt && cut -f 1,7 body.txt > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353699.dat'    && sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353690.dat|Bowtie Output|g' 'output.summary' > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353700.dat'
 ```
 ```
 cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/get_deseq_dataset.R' > /dev/null &&  Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/deseq2.R' --cores ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353705.dat' -p '/home/galaxy/galaxy/database/datasets/000/353/dataset_353706.dat'                  -H  -f '[["FactorName", [{"Control": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353693.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353695.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353697.dat"]}, {"Mutant": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353699.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353701.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353703.dat"]}]]]' -l '{"dataset_353699.dat": "Mutant1 SM seq", "dataset_353701.dat": "Mutant2 SM seq", "dataset_353703.dat": "Mutant3 SM seq", "dataset_353693.dat": "Control1 SM seq", "dataset_353695.dat": "Control2 SM seq", "dataset_353697.dat": "Control3 SM seq"}' -t 1
-```
-
-## RNA seq
-
-```ln -s '/home/galaxy/galaxy/database/datasets/000/353/dataset_353640.dat' input.fa && samtools faidx input.fa &&  samtools view -b -@ ${GALAXY_SLOTS:-1} -t input.fa.fai '/home/galaxy/galaxy/database/datasets/000/353/dataset_353424.dat' |  samtools sort -O bam -@ ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353646.dat' -T temp
-```
-```
-ln -s '/home/galaxy/galaxy/database/datasets/000/353/dataset_353641.dat' input.bam && ln -s '/home/galaxy/galaxy/database/datasets/_metadata_files/068/metadata_68275.dat' input.bai && samtools view -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353647.dat' -h   -b  -F 0x404 input.bam
-```
-```
-export FC_PATH=$(command -v featureCounts | sed 's@/bin/featureCounts$@@') &&  featureCounts  -a '/home/galaxy/galaxy/database/datasets/000/353/dataset_353639.dat' -F "GTF"  -o "output" -T ${GALAXY_SLOTS:-2}  -s  0 -t 'exon' -g 'gene_id'            -Q  12  --minOverlap  1 --fracOverlap 0 --fracOverlapFeature 0          -C  '/home/galaxy/galaxy/database/datasets/000/353/dataset_353648.dat'  && grep -v "^#" "output" | sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353648.dat|Filter SAM or BAM, output SAM or BAM on data 16: bam|g' > body.txt && cut -f 1,7 body.txt > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353673.dat'    && sed -e 's|/home/galaxy/galaxy/database/datasets/000/353/dataset_353648.dat|Filter SAM or BAM, output SAM or BAM on data 16: bam|g' 'output.summary' > '/home/galaxy/galaxy/database/datasets/000/353/dataset_353674.dat'
-```
-```
-cat '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/get_deseq_dataset.R' > /dev/null &&  Rscript '/home/galaxy/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/deseq2/71bacea10eee/deseq2/deseq2.R' --cores ${GALAXY_SLOTS:-1} -o '/home/galaxy/galaxy/database/datasets/000/353/dataset_353824.dat' -p '/home/galaxy/galaxy/database/datasets/000/353/dataset_353825.dat'                  -H  -f '[["FactorName", [{"Control": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353818.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353820.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353822.dat"]}, {"Mutant": ["/home/galaxy/galaxy/database/datasets/000/353/dataset_353812.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353814.dat", "/home/galaxy/galaxy/database/datasets/000/353/dataset_353816.dat"]}]]]' -l '{"dataset_353812.dat": "Mutant1 RNA", "dataset_353814.dat": "Mutant2 RNA", "dataset_353816.dat": "Mutant3 RNA", "dataset_353818.dat": "Control1 RNA", "dataset_353820.dat": "Control2 RNA", "dataset_353822.dat": "Control3 RNA"}' -t 1
 ```
 
 
